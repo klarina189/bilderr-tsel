@@ -1,0 +1,49 @@
+{{ block title }}Die erste Aufgabe ist nun beendet. {{ endblock }}
+{{ block content }}
+
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Gallery</title>
+        <style>
+        {{ if player.participant.id_treatment_label == "HighID" }}
+            {{ if player.participant.group_label == "A" }}
+                .background-color-box {
+                    border: 5px solid blue
+                }
+            {{ elif player.participant.group_label == "B" }}
+                .background-color-box {
+                    border: 5px solid darkorange
+                   }
+            {{ endif }}
+        {{ elif player.participant.id_treatment_label == "LowID" }}
+            .background-color-box {
+                    background-color: white
+            }
+        {{ endif }}
+    </style>
+    </head>
+    <body class="background-color-box">
+        {{ if player.participant.id_treatment_label == "HighID" }}
+            <p>
+                Sie und Ihr*e Partner*in haben zusammen, {{ player.amount_correct_answers }}
+                {{ if player.amount_correct_answers != 1 }}  Bilder
+                {{ else }} Bild
+                {{ endif }}
+                richitg identifiziert. Somit haben Sie in der ersten Aufgabe {{ player.payoff }} verdient.
+            </p>
+        {{ else }}
+            <p>
+                Sie haben {{ player.amount_correct_answers }}
+                {{ if player.amount_correct_answers != 1 }}  Bilder
+                {{ else }} Bild
+                {{ endif }}
+                richitg identifiziert. Somit haben Sie in der ersten Aufgabe {{ player.payoff }} verdient.
+            </p>
+        {{ endif }}
+
+        {{ next_button }}
+    </body>
+
+{{ endblock }}
