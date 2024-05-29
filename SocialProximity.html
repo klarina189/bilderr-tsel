@@ -1,0 +1,46 @@
+{{ block title }}Fragen zum Spiel{{ endblock }}
+{{ block content }}
+
+    <style>
+    img {
+       padding: 1px;
+       width: 91px;
+    }
+    {{ if player.participant.id_treatment_label == "HighID" }}
+            {{ if player.participant.group_label == "A" }}
+                .background-color-box {
+                    border: 5px solid blue
+                }
+            {{ elif player.participant.group_label == "B" }}
+                .background-color-box {
+                    border: 5px solid darkorange
+                   }
+            {{ endif }}
+        {{ elif player.participant.id_treatment_label == "LowID" }}
+            .background-color-box {
+                    background-color: white
+            }
+        {{ endif }}
+    </style>
+
+    <body class="background-color-box">
+        <p>
+            Bevor Ihre Gruppe zur zweiten Aufgabe gelangt, beantworten Sie bitte noch die folgenden Fragen.
+        </p>
+
+        {{ formfield "circle_question_bf_PGG" }}
+        <p>
+            Bitte kreuzen Sie nun an, inwieweit Sie den Begriff "WIR" verwenden würden
+            um von Ihnen und Ihrem*Ihrer Gruppenpartner*in zu sprechen.
+            <br>
+            <span style="vertical-align: super; font-size: smaller;"> gar nicht </span> &nbsp;
+            {{ for choice in form.we_question_bf_PGG }}
+                {{ choice }}
+            {{ endfor }}
+            &nbsp; <span style="vertical-align: super; font-size: smaller;"> voll und ganz </span>
+        </p>
+
+        {{ next_button }}
+    </body>
+
+{{ endblock }}
