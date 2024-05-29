@@ -1,0 +1,75 @@
+{{ block title }}Instruktionen erste Aufgabe{{ endblock }}
+{{ block content }}
+
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Gallery</title>
+        <style>
+        .general-text {
+            color: black;
+            text-align: justify;
+            line-height: 2;
+        }
+        {{ if player.participant.id_treatment_label == "HighID" }}
+            {{ if player.participant.group_label == "A" }}
+                .background-color-box {
+                    border: 5px solid blue
+                }
+            {{ elif player.participant.group_label == "B" }}
+                .background-color-box {
+                    border: 5px solid darkorange
+                   }
+            {{ endif }}
+        {{ elif player.participant.id_treatment_label == "LowID" }}
+            .background-color-box {
+                    background-color: white
+            }
+        {{ endif }}
+    </style>
+    </head>
+    <body class="background-color-box">
+        {{ if player.participant.id_treatment_label == "HighID" }}
+            <div class="general-text">
+                <p>
+                    In der ersten Aufgabe müssen Sie und Ihr*e Partner*in gemeinsam herausfinden, wer die
+                    vier Kunstwerke, die Sie auf der nächsten Seite sehen werden, gemalt hat. Nutzen Sie
+                    dafür den Chat, um sich mit Ihrem*r Partner*in auszutauschen.
+                </p>
+                <p>
+                    <strong>Für jede richtige Antwort, die Sie beide zusammen geben, bekommen
+                    Sie 40 Punkte</strong>. Wenn nur Sie oder nur Ihr*e Partner*in die richtige Antwort gibt,
+                    erhalten Sie keine Punkte. Sie haben für diese Aufgabe <b>5 Minuten</b> Zeit.
+                </p>
+                <p>
+                    Wenn Sie jetzt auf "Weiter" klicken, gelangen Sie in einen virtuellen Warteraum und sobald
+                    Ihr*e Partner*in auch in dem Warteraum angekommen ist, werden Sie zur Aufgabe weitergeleitet.
+                    Dann beginnen auch die 5 Minuten Bearbeitungszeit und ein Timer gibt Ihnen die übrige Zeit an.
+                </p>
+            </div>
+        {{elif player.participant.id_treatment_label == "LowID" }}
+             <div class="general-text">
+                 <p>
+                    In der ersten Aufgabe müssen Sie herausfinden, wer die vier Kunstwerke, die Sie auf der
+                    nächsten Seite sehen werden, gemalt hat. Ihre Performance hängt von Ihren eigenen Antworten
+                    ab und den Antworten, der anderen Person in Gruppe
+                    {{ if player.participant.group_label == "A" }} A
+                    {{ elif player.participant.group_label == "B" }} B
+                    {{ endif}}. Sie bekommen für jede richtige Antwort <strong>40 Punkte</strong>. Diese 40 Punkte
+                    erhalten Sie jedoch nur,<strong>wenn auch die andere Person in Ihrer Gruppe die richtige Antwort
+                    gegeben hat</strong>. Sie haben für diese Aufgabe <b>5 Minuten</b> Zeit.
+                 </p>
+                 <p>
+                    Wenn Sie auf "Weiter" klicken, gelangen Sie in einen virtuellen Warteraum, in dem Sie auf die
+                    anderen Teilnehmenden des heutigen Experiments warten werden. Sobald alle da sind, werden Sie
+                    automatisch zur ersten Aufgabe weitergeleitet. Erst dann beginnen auch die 5 Minuten
+                    Bearbeitungszeit und ein Timer gibt Ihnen die übrige Zeit an.
+                 </p>
+            </div>
+        {{ endif }}
+        <br>
+    </body>
+
+    {{ next_button }}
+{{ endblock }}
