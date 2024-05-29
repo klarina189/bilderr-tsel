@@ -1,0 +1,85 @@
+{{ block title }}Erste Aufgabe{{ endblock }}
+{{ block content }}
+
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Gallery</title>
+        <style>
+            /* Style the container to hold the images */
+            .image-gallery {
+                display: flex; /* Use flexbox layout */
+                justify-content: space-between; /* Distribute space between items */
+            }
+
+            /* Style the individual images */
+            .image-gallery img {
+                margin-right: 10px; /* Add space between images */
+            }
+
+            /* Style the container to hold the image and form field pairs */
+            .image_formfield_gallery {
+                display: flex; /* Use flexbox layout */
+                justify-content: space-between; /* Distribute space between items */
+                flex-wrap: wrap; /* Allow items to wrap to the next line */
+            }
+
+            /* Style each image and form field pair */
+            .image_formfield_gallery > div {
+                margin-bottom: 20px; /* Add space between pairs */
+            }
+            {{ if player.participant.id_treatment_label == "HighID" }}
+                {{ if player.participant.group_label == "A" }}
+                    .background-color-box {
+                        border: 5px solid blue
+                    }
+                {{ elif player.participant.group_label == "B" }}
+                    .background-color-box {
+                        border: 5px solid darkorange
+                       }
+                {{ endif }}
+            {{ elif player.participant.id_treatment_label == "LowID" }}
+                .background-color-box {
+                        background-color: white
+                }
+            {{ endif }}
+
+
+        </style>
+    </head>
+    <body class="background-color-box">
+        <div>
+            <p>
+                Bitte wählen Sie unter dem jeweiligen Kunstwerk aus, wer dieses gemalt hat.
+            </p>
+        </div>
+        {{ if player.participant.id_treatment_label == "HighID" }}
+            <p>
+                Nutzen Sie den Chat zum Austausch mit Ihrem*r Partner*in.
+            </p>
+            {{ chat nickname=player.channel_nickname channel=player.channel_name }}
+        {{ endif }}
+        <br>
+        <div class="image_formfield_gallery">
+             <div class="painting_formfield_1">
+                 <img src="{{ static 'Painting_1_bleu_ii.jpg' }}" width="260" height="190"/>
+                 <div>{{ formfield 'painting_1' }}</div>
+            </div>
+            <div class="painting_formfield_3">
+                <img src="{{ static 'Painting_2_primavera.jpg' }}" width="260" height="190"/>
+                <div>{{ formfield 'painting_2' }}</div>
+            </div>
+            <div class="painting_formfield_3">
+                <img src="{{ static 'Painting_3_American_Gothic.jpg' }}" width="200" height="270"/>
+                <div>{{ formfield 'painting_3' }}</div>
+            </div>
+            <div class="painting_formfield_4">
+                <img src="{{ static 'Painting_4_La_familia_de_Felipe_IV_o_Las_Meninas.jpg' }}" width="200" height="270"/>
+                <div>{{ formfield 'painting_4' }}</div>
+            </div>
+        </div>
+    </body>
+
+    {{ next_button }}
+{{ endblock }}
